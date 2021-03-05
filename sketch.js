@@ -25,6 +25,8 @@ async function setup() {
 
   // Create the UI buttons
   createButtons();
+  
+  knnClassifier.load('dance-model.json');
 
   // Create a new poseNet method with a single detection
   poseNet = ml5.poseNet(video, modelReady);
@@ -113,6 +115,23 @@ function createButtons() {
   // Clear all classes button
   buttonClearAll = document.querySelector("#clearAll");
   buttonClearAll.addEventListener("click", clearAllLabels);
+
+  // Predict button
+  buttonSave = document.querySelector("#buttonSave");
+  buttonSave.addEventListener("click", saveModel);
+
+  // Predict button
+  buttonLoad = document.querySelector("#buttonLoad");
+  buttonLoad.addEventListener("click", buttonLoad);
+
+}
+
+function saveModel() {
+  knnClassifier.save('dance-model.json');
+}
+
+function loadModel() {
+  knnClassifier.load('dance-model.json');
 }
 
 // Show the results
